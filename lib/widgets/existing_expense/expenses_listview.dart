@@ -6,15 +6,27 @@ import '../../models/expense.dart';
 class ExpensesListView extends StatelessWidget {
 
   final List <Expense> expenses;
-
-  const ExpensesListView({Key? key, required this.expenses}) : super(key: key);
+  final void Function(Expense) onRemoveExpense;
+  const ExpensesListView({Key? key, required this.expenses, required this.onRemoveExpense}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: expenses.length,
       itemBuilder: ((context, index) {
-        return ExpenseItem(expense: expenses[index]);
+        return Dismissible(
+          key: ValueKey(expenses[index]),
+          background: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20.0),
+              color: const Color.fromARGB(255, 247, 116, 107)
+            ) ,
+          ),
+          onDismissed: ((direction) => {
+            onRemoveExpense(expenses[index])
+          }),
+          child: ExpenseItem(expense: expenses[index])
+        );
       })
     );
   }

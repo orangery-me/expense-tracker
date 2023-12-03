@@ -39,18 +39,48 @@ class _ExpensesState extends State<Expenses>{
       _expenses.add(expense);
     });
   }
-  
+
+  void _deleteExpense(Expense expense){
+    final index= _expenses.indexOf(expense);
+    setState(() {
+      _expenses.remove(expense);
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: const Text('Expense is deleted successfully'),
+        action: SnackBarAction(
+          label: 'Undo',
+          onPressed: () {
+            setState(() {
+              _expenses.insert(index, expense);
+            });
+          },
+        ),
+        backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+      )
+    );
+  }
+
   void _openAddExpenseWindow(){
     showModalBottomSheet(context: context,
+      isScrollControlled: true,
       builder: (ctx){
         return NewExpense(_addNewExpense);
       }
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
+    Widget mainContent = const Center(
+      child: Text('It\'s time to track your expenses!'),
+    );
+
+    if (_expenses.isNotEmpty){
+      mainContent = ExpensesListView(
+              expenses: _expenses, onRemoveExpense: _deleteExpense);
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Expense Tracker'),
@@ -63,13 +93,17 @@ class _ExpensesState extends State<Expenses>{
           )
         ],
       ),
-      body: Column(
-        children: [
-          const Text('The chart!'),
-          Expanded(
-            child: ExpensesListView(expenses: _expenses)
-          )
-        ],
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+        // color: Theme.of(context).colorScheme.inverseSurface,
+        child: Column(
+          children: [
+            const Text('The chart!'),
+            Expanded(
+              child: mainContent
+            )
+          ],
+        ),
       ),
     );
   }

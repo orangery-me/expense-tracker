@@ -8,14 +8,14 @@ final formatter = DateFormat('EEE, d/M/y');
 enum Category {food, travel, leisure, work, transportation, investion, rental, learn }
 
 const categoryIcons = {
-  Category.food : Icons.lunch_dining,
+  Category.food : Icons.fastfood,
   Category.travel: Icons.travel_explore,
   Category.leisure:Icons.movie,
   Category.work : Icons.work,
   Category.transportation : Icons.pedal_bike,
   Category.investion : Icons.integration_instructions,
   Category.rental : Icons.home,
-  Category.learn : Icons.book
+  Category.learn : Icons.library_books
 
 };
  
