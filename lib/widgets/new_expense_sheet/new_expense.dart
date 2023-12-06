@@ -116,9 +116,7 @@ class _NewExpenseState extends State<NewExpense>{
                     children: [
                       Text(
                         (_selectedDate == null) ? 'Select Date': _formatter.format(_selectedDate!),
-                        style: const TextStyle(
-                          fontSize: 15.0,
-                        ),
+                        style: Theme.of(context).textTheme.displaySmall
                       ),
                       const SizedBox(width: 4.0),
                       IconButton(
@@ -133,11 +131,8 @@ class _NewExpenseState extends State<NewExpense>{
             const SizedBox(height: 20.0,),
             Row(
               children: [
-                const Text('Category: ',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    color: Color.fromARGB(179, 55, 55, 55)
-                  ),
+                Text('Category: ',
+                  style: Theme.of(context).textTheme.displaySmall
                 ),
                 const SizedBox(width: 8.0,),
                 DropdownButton(
@@ -148,7 +143,8 @@ class _NewExpenseState extends State<NewExpense>{
                           // the value to return
                           value: item,
                           // the thing (text) that menu item will show
-                          child: Text(item.name.toUpperCase())
+                          child: Text(item.name.toUpperCase(),
+                              style: Theme.of(context).textTheme.displaySmall)
                         )
                     ).toList(),
                   onChanged: (value){

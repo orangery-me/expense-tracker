@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_section_5/expenses.dart';
 
@@ -5,43 +7,70 @@ void main() {
   runApp(const MyApp());
 }
 
-var kColorScheme = ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 5, 73, 6));
-var kDarkColorScheme = ColorScheme.fromSeed(seedColor:Color.fromARGB(255, 2, 25, 2));
+var lightColorScheme = ColorScheme.fromSeed(seedColor: Colors.green).copyWith(
+    brightness: Brightness.light,
+    background: Colors.white,
+    secondary: const Color.fromARGB(255, 219, 234, 220),
+    onSecondary: Colors.black
+);
+
+var darkColorScheme = ColorScheme.fromSeed(seedColor: Colors.black).copyWith(
+  brightness: Brightness.dark,
+  background: Colors.black12,
+  primary: Colors.black,
+  secondary: Colors.black54,
+  onSecondary: Colors.white
+);
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
     return  MaterialApp(
-      darkTheme: ThemeData(
-        colorScheme: kDarkColorScheme,
-        cardTheme: CardTheme(
-          color: kDarkColorScheme.secondaryContainer,
-          margin: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-        ),
-         textTheme: ThemeData().textTheme.copyWith(
-          titleLarge: TextStyle(color: kDarkColorScheme.surfaceTint, fontSize: 24.0, fontWeight: FontWeight.bold),
-          titleSmall: TextStyle(color: kDarkColorScheme.onPrimaryContainer, fontSize: 16.0,fontWeight: FontWeight.bold),
-        ),
-      ),
-      theme: ThemeData(
-        colorScheme: kColorScheme,
+      darkTheme: ThemeData.dark().copyWith(
+        colorScheme: darkColorScheme,
+        backgroundColor: darkColorScheme.background,
         appBarTheme: const AppBarTheme().copyWith(
-          backgroundColor: kColorScheme.onPrimaryContainer,
-          foregroundColor: kColorScheme.primaryContainer
+          backgroundColor: darkColorScheme.primary,
+          foregroundColor: darkColorScheme.onPrimary
         ),
-        cardTheme: CardTheme(
-          color: kColorScheme.secondaryContainer,
+        cardTheme: const CardTheme().copyWith(
+          color: darkColorScheme.secondary,
+          surfaceTintColor: darkColorScheme.onSecondary,
           margin: const EdgeInsets.only(top: 8.0, bottom: 8.0),
         ),
         textTheme: ThemeData().textTheme.copyWith(
-          titleLarge: TextStyle(color: kColorScheme.surfaceTint, fontSize: 24.0, fontWeight: FontWeight.bold),
-          titleSmall: TextStyle(color: kColorScheme.onPrimaryContainer, fontSize: 16.0,fontWeight: FontWeight.bold),
+          titleLarge: TextStyle(color: darkColorScheme.primary, fontSize: 24.0, fontWeight: FontWeight.bold),
+          titleSmall: TextStyle(color: darkColorScheme.onSecondary, fontSize: 16.0,fontWeight: FontWeight.bold),
+          displaySmall: TextStyle(color: darkColorScheme.onSecondary, fontSize: 14.0)
+        ),
+        iconTheme: const IconThemeData(color: Colors.white, size: 20.0),
+        buttonTheme: const ButtonThemeData().copyWith(
+          buttonColor: darkColorScheme.primary,
+        )
+      ),
+      theme: ThemeData(
+        colorScheme: lightColorScheme,
+        backgroundColor: lightColorScheme.background,
+        appBarTheme: const AppBarTheme().copyWith(
+          backgroundColor: lightColorScheme.primary,
+          foregroundColor: lightColorScheme.onPrimary
+        ),
+        cardTheme: const CardTheme().copyWith(
+          color: lightColorScheme.secondary,
+          surfaceTintColor: lightColorScheme.onSecondary,
+          margin: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+        ),
+        textTheme: ThemeData().textTheme.copyWith(
+          titleLarge: TextStyle(color: lightColorScheme.primary, fontSize: 24.0, fontWeight: FontWeight.bold),
+          titleSmall: TextStyle(color: lightColorScheme.onSecondary, fontSize: 16.0,fontWeight: FontWeight.bold),
+          displaySmall: TextStyle(color: lightColorScheme.onSecondary, fontSize: 14.0)
         ),
         iconTheme: const IconThemeData(color: Colors.black54, size: 20.0)
       ),
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       home: const Expenses(),
     );
   }

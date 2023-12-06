@@ -5,16 +5,12 @@ import 'package:uuid/uuid.dart';
 const uuid =  Uuid();
 final formatter = DateFormat('EEE, d/M/y');
 
-enum Category {food, travel, leisure, work, transportation, investion, rental, learn }
+enum Category {food, leisure, transportation, learn }
 
 const categoryIcons = {
   Category.food : Icons.fastfood,
-  Category.travel: Icons.travel_explore,
-  Category.leisure:Icons.movie,
-  Category.work : Icons.work,
+  Category.leisure : Icons.movie,
   Category.transportation : Icons.pedal_bike,
-  Category.investion : Icons.integration_instructions,
-  Category.rental : Icons.home,
   Category.learn : Icons.library_books
 
 };
@@ -35,5 +31,24 @@ const categoryIcons = {
 
   String get formattedDate {
     return formatter.format(date);
+  }
+}
+
+class ExpenseBucket{
+  final Category category;
+  final List<Expense> bucket;
+
+  ExpenseBucket({ required this.category, required this.bucket});
+
+  ExpenseBucket.byCategory({ required List <Expense> allExpense, required this.category})
+  : bucket = allExpense.where((element) => element.category == category).toList();
+
+  double get total{
+    double sum = 0;
+
+    for (final item in bucket){
+      sum+= item.amount;
+    }
+    return sum;
   }
 }

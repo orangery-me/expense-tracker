@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_section_5/widgets/chart/chart.dart';
 import 'package:flutter_section_5/widgets/existing_expense/expenses_listview.dart';
 import 'package:flutter_section_5/models/expense.dart';
 import 'package:flutter_section_5/widgets/new_expense_sheet/new_expense.dart';
@@ -32,6 +33,11 @@ class _ExpensesState extends State<Expenses>{
         amount: 20.0,
         date: DateTime.now(),
         category: Category.transportation), 
+      Expense(
+        title: 'Coke',
+        amount: 10.0,
+        date: DateTime.now(),
+        category: Category.food), 
     ];
 
   void _addNewExpense(Expense expense){
@@ -94,11 +100,10 @@ class _ExpensesState extends State<Expenses>{
         ],
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
-        // color: Theme.of(context).colorScheme.inverseSurface,
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
         child: Column(
           children: [
-            const Text('The chart!'),
+            Chart(expenses: _expenses),
             Expanded(
               child: mainContent
             )
