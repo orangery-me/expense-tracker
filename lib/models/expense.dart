@@ -12,7 +12,6 @@ const categoryIcons = {
   Category.leisure : Icons.movie,
   Category.transportation : Icons.pedal_bike,
   Category.learn : Icons.library_books
-
 };
  
  class Expense{

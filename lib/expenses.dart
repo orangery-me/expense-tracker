@@ -15,7 +15,7 @@ class _ExpensesState extends State<Expenses>{
   final List <Expense> _expenses = [
       Expense(
         title: 'Flour to make cake',
-        amount: 8.99,
+        amount: 19.99,
         date: DateTime.utc(2023, 11, 30),
         category: Category.food), 
       Expense(
@@ -25,17 +25,17 @@ class _ExpensesState extends State<Expenses>{
         category: Category.learn), 
       Expense(
         title: 'Cinema',
-        amount: 16.5,
+        amount: 77.5,
         date: DateTime.utc(2023, 11, 29),
         category: Category.leisure), 
       Expense(
         title: 'Gas',
-        amount: 20.0,
+        amount: 281.0,
         date: DateTime.now(),
         category: Category.transportation), 
       Expense(
         title: 'Coke',
-        amount: 10.0,
+        amount: 145.5,
         date: DateTime.now(),
         category: Category.food), 
     ];
@@ -103,8 +103,12 @@ class _ExpensesState extends State<Expenses>{
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
         child: Column(
           children: [
-            Chart(expenses: _expenses),
             Expanded(
+              flex: 1,
+              child: Chart(_expenses)
+            ),
+            Expanded(
+              flex: 3,
               child: mainContent
             )
           ],

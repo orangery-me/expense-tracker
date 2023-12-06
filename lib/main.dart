@@ -8,14 +8,12 @@ void main() {
 }
 
 var lightColorScheme = ColorScheme.fromSeed(seedColor: Colors.green).copyWith(
-    brightness: Brightness.light,
     background: Colors.white,
     secondary: const Color.fromARGB(255, 219, 234, 220),
-    onSecondary: Colors.black
+    onSecondary: Colors.black,
 );
 
 var darkColorScheme = ColorScheme.fromSeed(seedColor: Colors.black).copyWith(
-  brightness: Brightness.dark,
   background: Colors.black12,
   primary: Colors.black,
   secondary: Colors.black54,
@@ -30,6 +28,7 @@ class MyApp extends StatelessWidget {
 
     return  MaterialApp(
       darkTheme: ThemeData.dark().copyWith(
+        brightness: Brightness.dark,
         colorScheme: darkColorScheme,
         backgroundColor: darkColorScheme.background,
         appBarTheme: const AppBarTheme().copyWith(
@@ -52,6 +51,7 @@ class MyApp extends StatelessWidget {
         )
       ),
       theme: ThemeData(
+        brightness: Brightness.light,
         colorScheme: lightColorScheme,
         backgroundColor: lightColorScheme.background,
         appBarTheme: const AppBarTheme().copyWith(
@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
         ),
         iconTheme: const IconThemeData(color: Colors.black54, size: 20.0)
       ),
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
       home: const Expenses(),
     );
   }

@@ -1,33 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_section_5/models/expense.dart';
 
 class ChartBar extends StatelessWidget {
-  const ChartBar({
-    super.key,
-    required this.fill,
-  });
-
-  final double fill;
+  final double fillRatio;
+  final IconData iconData;
+  const ChartBar(this.fillRatio, { required this.iconData, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final isDarkMode =
-        MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4),
-        child: FractionallySizedBox(
-          heightFactor: fill,
-          child: DecoratedBox(
-            decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(8)),
-              color: isDarkMode
-                  ? Theme.of(context).colorScheme.secondary
-                  : Theme.of(context).colorScheme.primary.withOpacity(0.65),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Flexible(
+            flex: 5,
+            child: FractionallySizedBox(
+              heightFactor: fillRatio,
+              child: Container(
+                margin: const EdgeInsets.symmetric(vertical: 2.0, horizontal: 4.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(4.0),
+                  color: Theme.of(context).colorScheme.primary.withOpacity(0.65),
+                ),
+              ),
             ),
           ),
-        ),
+          const SizedBox(height: 4.0),
+          Flexible(
+            flex: 1,
+            child: Icon(iconData),
+          ),
+        ],
       ),
     );
   }
